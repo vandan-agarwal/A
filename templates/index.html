@@ -1,0 +1,115 @@
+<html >
+ <head>
+
+    <meta charset="utf-8">
+     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Schedule Interview</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+  </head>
+  <body>
+  <form acion="#" method="post">
+  <div class="field">
+  <label class="label">Name</label>
+  <div class="control">
+    <input class="input" type="text" placeholder="Text input" name="student_name">
+  </div>
+</div>
+
+<div class="field">
+  <label class="label">Email</label>
+  <div class="control has-icons-left has-icons-right">
+    <input class="input " type="email" placeholder="Email input" name="email" >
+    <span class="icon is-small is-left">
+      <i class="fas fa-envelope"></i>
+    </span>
+    <span class="icon is-small is-right">
+      <i class="fas fa-exclamation-triangle"></i>
+    </span>
+  </div>
+</div>
+  <div class="field">
+  <label class="label">Interviewer</label>
+  <div class="control">
+    <input class="input" type="text" placeholder="Text input" name="interviewer">
+  </div>
+</div>
+<div class="field">
+  <label class="label">Date</label>
+  <div class="control">
+    <input class="input" type="text" placeholder="Text input" name="date">
+  </div>
+</div>
+<div class="field">
+  <label class="label">Slot</label>
+  <div class="control">
+    <input class="input" type="text" placeholder="Text input" name="slot">
+  </div>
+</div>
+
+
+<!-- <div class="field">
+  <label class="label">Interviewer</label>
+  <div class="control">
+    <div class="select">
+      <select>
+        <option>Person 1</option>
+        <option>Person 2</option>
+         <option>Person 3</option>
+        <option>Person 4</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div id="app">
+ <label class="label">Select Date</label>
+  <v-app id="inspire">
+    <v-row justify="center">
+      <v-date-picker v-model="picker"></v-date-picker>
+    </v-row>
+  </v-app>
+</div>
+<div class="field">
+  <label class="label">Time Slot</label>
+  <div class="control">
+    <div class="select">
+      <select>
+        <option>T 1</option>
+        <option>T 2</option>
+         <option>T 3</option>
+        <option>T 4</option>
+      </select>
+    </div>
+  </div>
+</div> -->
+
+
+
+<div class="field is-grouped">
+  <div class="control">
+    <button class="button is-link" value="submit">Submit</button>
+  </div>
+</div>
+</form>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+     data () {
+    return {
+      picker: new Date().toISOString().substr(0, 10),
+    }
+  },
+})
+  </script>
+</body>
+</html>
+
+
