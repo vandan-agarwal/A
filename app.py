@@ -1,7 +1,7 @@
 import os
 from datetime import date
 
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy 
 
 app = Flask(__name__)
@@ -31,12 +31,15 @@ def home():
     slot=request.form["slot"]
     temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
     if temp:
-      return '<h1>Interviewer busy!</h1>'
+      # flash("Interviewer not availble!!")
+      #return render_template("index.html")
+      return "<"
     else: 
       user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
       db.session.add(user)
       db.session.commit()
-      flash(Added</
+      flash("Added")
+      return render_template("index.html")
   else: 
     return render_template("index.html")
 
@@ -72,4 +75,5 @@ def get_user(name):
   
 if __name__ == '__main__':
     db.create_all()
+    app.secret_key = os.urandom(24)
     app.run(debug=True, port=int(os.getenv('PORT', 5000)))
