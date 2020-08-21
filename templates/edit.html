@@ -23,8 +23,21 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"
     />
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
   </head>
   <body>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
+     <div class="container-lg mt-3 border ">
     <div class="field">
         <label class="label">{{values.student_name}}</label>
       </div>
@@ -49,7 +62,7 @@
         <div class="control">
           <input
             class="input"
-            type="text"
+            type="date"
             placeholder="Text input"
             name="date"
           />
@@ -108,7 +121,8 @@
         </div>
       </div>
     </form>
-    <a href="/show_all">tt</a>
+    </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>

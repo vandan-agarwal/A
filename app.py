@@ -57,13 +57,13 @@ def index(id):
     temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
     if temp:
       flash('Interviewer Unavailable!!')
-      return render_template("index.html")
-      return "<h1>Busy</h1>"
+      return render_template("edit.html", values=user)
     else:
       user.interviewer=interviewer
       user.date_created=date_created
       user.slot=slot
       db.session.commit()
+      flash("Interview Modified!!")
       return render_template("show_all.html", values=User.query.all())
   else:
     return render_template("edit.html", values=user)
