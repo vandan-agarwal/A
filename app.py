@@ -18,7 +18,7 @@ class User(db.Model):
     student_name = db.Column(db.String(50))
     email=db.Column(db.String(50))
     interviewer = db.Column(db.String(50))
-    date = db.Column(db.String(50))		
+    date_created = db.Column(db.String(50))		
     slot=db.Column(db.String(50))
 
 @app.route('/', methods=["POST","GET"])
@@ -27,16 +27,16 @@ def home():
     student_name= request.form["student_name"]
     email= request.form["email"]
     interviewer= request.form["interviewer"]
-    date= request.form["date"]
+    date_created= request.form["date"]
     slot=request.form["slot"]
-    temp=User.query.filter_by(interviewer=interviewer,date=date,slot=slot).first()
+    temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
     if temp:
       return '<h1>Interviewer busy!</h1>'
     else: 
       user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
       db.session.add(user)
       db.session.commit()
-      return '<h1> Added</h1>'
+      flash(Added</
   else: 
     return render_template("index.html")
 
