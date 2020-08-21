@@ -32,9 +32,7 @@ def home():
 		user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
 		db.session.add(user)
 		db.session.commit()
-
-
-
+    
 		return '<h1> Added</h1>'
 	else: 
 		return render_template("index.html")
