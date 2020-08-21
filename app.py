@@ -29,11 +29,15 @@ def home():
 		interviewer= request.form["interviewer"]
 		date_created= request.form["date"]
 		slot=request.form["slot"]
-		user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
-		db.session.add(user)
-		db.session.commit()
     
-		return '<h1> Added</h1>'
+    temp=User.query.filter_by(student_name=student_name).first()
+    if temp:
+      flash("Interviewer busy!!")
+    else: 
+		  user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
+		  db.session.add(user)
+		  db.session.commit()
+      return '<h1> Added</h1>'
 	else: 
 		return render_template("index.html")
 
