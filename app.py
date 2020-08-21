@@ -49,13 +49,20 @@ def home():
 def show():
   return render_template("show_all.html", values=User.query.all())
 
-@app.route("/edit/<id>")
+@app.route("/edit/<id>",methods=["POST","GET"])
 def index(id):
-    user = User(name=name, location=location)
+  if request.method == "POST"
+    user = User.query.filter_by(id=id).first()
+    interviewer= request.form["interviewer"]
+    date_created= request.form["date"]
+    slot=request.form["slot"]
+    temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
+    if temp:
+       return render_template("show_all")
     db.session.add(user)
     db.session.commit()
-
     return '<h1>Added New User!</h1>'
+
 
 if __name__ == '__main__':
     db.create_all()
