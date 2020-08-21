@@ -33,13 +33,15 @@ def home():
     if temp:
       # flash("Interviewer not availble!!")
       #return render_template("index.html")
-      return "<"
+      return "<h1>no</h1>"
     else: 
       user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
       db.session.add(user)
       db.session.commit()
-      flash("Added")
-      return render_template("index.html")
+      # flash("Added")
+      # return render_template("index.html")
+      return "<h1>yes</h1>"
+      
   else: 
     return render_template("index.html")
 
