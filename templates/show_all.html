@@ -1,6 +1,7 @@
 <html >
  <head>
     <meta charset="utf-8">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
      <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
@@ -22,45 +23,18 @@
       <th scope="col">Edit</th>
     </tr>
   </thead>
-  <tbody>
-    </tbody>
-        
+  <tbody>        
 {% for item in values %}
 <tr>
       <th scope="row">{{item.id}}</th>
-      <td>{{item.interviewer}}</td>
-      <td>{{item.interviewer}}</td>
+      <td>{{item.student_name}}</td>
+      <td>{{item.email}}</td>
   <td>{{item.interviewer}}</td>
-  <td>{{item.interviewer}}</td>
-  <td>{{item.interviewer}}</td>
+  <td>{{item.date_created}}</td>
+  <td>{{item.slot}}</td>
+  <td><a href="/edit/{{item.id}}">edit</a></td>
 </tr>  
-    
-<p>{</p>
-<p></p>
-<p></p>
-<p>{{item.date_created}}</p>
-<p>{{item.slot}}</p>
 {% endfor %}
-
-
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
   </tbody>
 </table>
 </body>

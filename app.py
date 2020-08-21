@@ -49,6 +49,13 @@ def home():
 def show():
   return render_template("show_all.html", values=User.query.all())
 
+@app.route("/edit/<id>")
+def index(id):
+    user = User(name=name, location=location)
+    db.session.add(user)
+    db.session.commit()
+
+    return '<h1>Added New User!</h1>'
 
 if __name__ == '__main__':
     db.create_all()
