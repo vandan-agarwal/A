@@ -49,24 +49,24 @@ def home():
 def show():
   return render_template("show_all.html", values=User.query.all())
 
-# @app.route("/edit/<id>",methods=["POST","GET"])
-# def index(id):
-#   user = User.query.filter_by(id=id).first()
-#   if request.method == "POST"
-#     interviewer= request.form["interviewer"]
-#     date_created= request.form["date"]
-#     slot=request.form["slot"]
-#     temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
-#     if temp:
-#       return "<h1>Busy</h1>"
-#     else:
-#       user.interviewer=interviewer
-#       user.date_created=date_created
-#       user.slot=slot
-#       db.session.commit()
-#       return render_template("edit.html", value=user)
-#   else:
-#     return render_template("edit.html", value=user)
+@app.route("/edit/<id>",methods=["POST","GET"])
+def index(id):
+  user = User.query.filter_by(id=id).first()
+  if request.method == "POST":
+    interviewer= request.form["interviewer"]
+    date_created= request.form["date"]
+    slot=request.form["slot"]
+    temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
+    if temp:
+      return "<h1>Busy</h1>"
+    else:
+      user.interviewer=interviewer
+      user.date_created=date_created
+      user.slot=slot
+      db.session.commit()
+      return render_template("show_all.html", values=User.query.all())
+  else:
+    return render_template("edit.html", values=user)
 
 
 if __name__ == '__main__':
