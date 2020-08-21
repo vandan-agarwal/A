@@ -10,15 +10,58 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
   </head>
   <body>
-  
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Student_Name</th>
+      <th scope="col">email</th>
+      <th scope="col">Interviewer</th>
+      <th scope="col">Date</th>
+      <th scope="col">slot</th>
+      <th scope="col">Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    </tbody>
+        
 {% for item in values %}
-<p>{{item.id}}</p>
-<p>{{item.student_name}}</p>
-<p>{{item.interviewer}}</p>
+<tr>
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.interviewer}}</td>
+      <td>{{item.interviewer}}</td>
+  <td>{{item.interviewer}}</td>
+  <td>{{item.interviewer}}</td>
+  <td>{{item.interviewer}}</td>
+</tr>  
+    
+<p>{</p>
+<p></p>
+<p></p>
 <p>{{item.date_created}}</p>
 <p>{{item.slot}}</p>
 {% endfor %}
 
 
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
 </body>
 </html>
