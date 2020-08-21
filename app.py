@@ -31,13 +31,13 @@ def home():
     slot=request.form["slot"]
     temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
     if temp:
-      error = 'Invalid credentials'
+      flash('Interviewer Unavailable!!')
       return render_template("index.html")
     else: 
       user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
       db.session.add(user)
       db.session.commit()
-      flash("Added")
+      flash("Interview Scheduled!!")
       return render_template("index.html")
       
   else: 
@@ -56,6 +56,8 @@ def index(id):
     slot=request.form["slot"]
     temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
     if temp:
+      flash('Interviewer Unavailable!!')
+      return render_template("index.html")
       return "<h1>Busy</h1>"
     else:
       user.interviewer=interviewer

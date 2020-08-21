@@ -27,6 +27,16 @@
     
   </head>
   <body>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
     <div class="container-lg mt-3 border ">
     <form acion="#" method="post">
       <div class="field">
@@ -59,7 +69,7 @@
         </div>
       </div>
       <div class="field">
-        <label class="label">Interviewer</label>
+        <label class="label">Interviewer( List to be added)</label>
         <div class="control">
           <input
             class="input"
@@ -82,7 +92,7 @@
         </div>
       </div>
       <div class="field">
-        <label class="label">Slot</label>
+        <label class="label">Slot ( List to be addded )</label>
         <div class="control">
           <input
             class="input"
