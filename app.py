@@ -20,7 +20,7 @@ from email import encoders
 
 
 
-def sendmailLivePass(reciever,name,partner):
+def sendmailLivePass(reciever,name,partner,date,slot):
     sender= 'amanavearma@gmail.com'
 
     msg= MIMEMultipart()    
@@ -32,12 +32,12 @@ def sendmailLivePass(reciever,name,partner):
     <head></head>
     <body>
     <p>Hey {{name}},<br>
-       Yo<br>u
-       Here is the <a href="https://www.python.org">link</a> you wanted.
+       You have an interview<br>
+       with {{partner}} on {{date}} at {{slot[0:5]}}.
     </p>
-  </body>
-</html>
-"""
+    </body>
+    </html>
+    """
     msg.attach(MIMEText(body,'plain'))
     s= smtplib.SMTP('smtp.gmail.com',587)
     s.starttls()
@@ -78,7 +78,7 @@ class User(db.Model):
 class Busy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-    Date=db.Column(db.String(10))
+    date=db.Column(db.String(10))
     slot=db.Column(db.String(5))
     # end=db.Column(db.String(5))
 
@@ -106,12 +106,16 @@ def home():
     if busy1:
       flash('Student1 Unavailable!!')
       return render_template("index.html")
-    else if busy2: 
+    elif busy2: 
       flash('Student2 Unavailable!!')
       return render_template("index.html")
     else:
       busy1=Busy(name=student1,date=date,slot=slot)
       busy2=Busy(name=student2,date=date,slot=slot)
+      st1=User.query.filter_by(student_name=student1).first()
+      st2=User.query.filter_by(student_name=student2).first()
+      sendmailLivePass(st1.email,student1,student2,date,slot)
+      sendmailLivePass(st2.email,student2,student1,date,slot)
       db.session.add(busy1)
       db.session.add(busy2)
       interview= Interview(student1=student1,student2=student2,date=date,slot=slot)
