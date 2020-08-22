@@ -90,6 +90,15 @@ def index(id):
   else:
     return render_template("edit.html", values=user)
 
+@app.route("/email")
+def send_mail():
+  msg = Message("Hello", recipients=["vandanrkt@gmail.com"])
+  mail.send(msg)
+  
+  return "Message has been sent!"
+
+
+
 
 if __name__ == '__main__':
     db.create_all()
