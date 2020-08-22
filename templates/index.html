@@ -43,10 +43,10 @@
         <label class="label">Select Student 1</label>
          <input list="names" name="student1"> 
          <datalist id="names">
-             {% for user in users %}
-             <option value="{{user.student_name}}"></option>
+             {% for user in values %}
+               <option value="{{user.student_name}}">
              {% endfor %}
-</datalist> 
+        </datalist> 
         <div class="control">
           <input
             class="input"
