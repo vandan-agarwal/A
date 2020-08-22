@@ -60,11 +60,14 @@ class Busy(db.Model):
     start=db.Column(db.String(5))
     end=db.Column(db.String(5))
 
+class Interview(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    student1 = db.Column(db.String(50))
+    student2 = db.Column(db.String(50))
+    date = db.Column(db.String(50))
+    start=db.Column(db.String(5))
+    end=db.Column(db.String(5))
     
-    
-    interviewer = db.Column(db.String(50))
-    date_created = db.Column(db.String(50))		
-    slot=db.Column(db.String(50))
 
 @app.route('/', methods=["POST","GET"])
 def home():
@@ -86,7 +89,12 @@ def home():
       return render_template("index.html")
       
   else: 
-    return render_template("index.html")
+    user=User.query.all()
+    if len(user)<2:
+      flash('Users are less than 2')
+      return render_template("index.html")
+    else:  
+      return render_template("index.html", values=user)
 
 @app.route("/show_all")
 def show():
