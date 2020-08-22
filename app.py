@@ -20,14 +20,24 @@ from email import encoders
 
 
 
-def sendmailLivePass(reciever):
+def sendmailLivePass(reciever,name,partner):
     sender= 'amanavearma@gmail.com'
 
     msg= MIMEMultipart()    
     msg['From'] = sender
     msg['To'] = reciever
-    msg['Subject'] = 'Access Granted'
-    body = """Hello"""
+    msg['Subject'] = 'Interview Scheduled'
+    body = """\
+    <html>
+    <head></head>
+    <body>
+    <p>Hey {{name}},<br>
+       Yo<br>u
+       Here is the <a href="https://www.python.org">link</a> you wanted.
+    </p>
+  </body>
+</html>
+"""
     msg.attach(MIMEText(body,'plain'))
     s= smtplib.SMTP('smtp.gmail.com',587)
     s.starttls()
@@ -97,8 +107,15 @@ def home():
       flash('Student1 Unavailable!!')
       return render_template("index.html")
     else if busy2: 
-      user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
-      db.session.add(user)
+      flash('Student2 Unavailable!!')
+      return render_template("index.html")
+    else:
+      busy1=Busy(name=student1,date=date,slot=slot)
+      busy2=Busy(name=student2,date=date,slot=slot)
+      db.session.add(busy1)
+      db.session.add(busy2)
+      interview= Interview(student1=student1,student2=student2,date=date,slot=slot)
+      db.session.add(interview)
       db.session.commit()
       flash("Interview Scheduled!!")
       return render_template("index.html")
