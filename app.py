@@ -1,10 +1,10 @@
 import os
 import datetime
 
-date_1 = datetime.datetime.strptime(start_date, "%m/%d/%y")
+# date_1 = datetime.datetime.strptime(start_date, "%m/%d/%y")
 
-end_date = date_1 + datetime.timedelta(days=10)
-date_2=datetime.strftime(end_date)
+# end_date = date_1 + datetime.timedelta(days=10)
+# date_2=datetime.strftime(end_date)
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy 
 
@@ -69,32 +69,32 @@ class Interview(db.Model):
     end=db.Column(db.String(5))
     
 
-@app.route('/', methods=["POST","GET"])
+@app.route('/') #, methods=["POST","GET"])
 def home():
-  if request.method == "POST":
-    student_name= request.form["student_name"]
-    email= request.form["email"]
-    interviewer= request.form["interviewer"]
-    date_created= request.form["date"]
-    slot=request.form["slot"]
-    temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
-    if temp:
-      flash('Interviewer Unavailable!!')
-      return render_template("index.html")
-    else: 
-      user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
-      db.session.add(user)
-      db.session.commit()
-      flash("Interview Scheduled!!")
-      return render_template("index.html")
+#   if request.method == "POST":
+#     student_name= request.form["student_name"]
+#     email= request.form["email"]
+#     interviewer= request.form["interviewer"]
+#     date_created= request.form["date"]
+#     slot=request.form["slot"]
+#     temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
+#     if temp:
+#       flash('Interviewer Unavailable!!')
+#       return render_template("index.html")
+#     else: 
+#       user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
+#       db.session.add(user)
+#       db.session.commit()
+#       flash("Interview Scheduled!!")
+#       return render_template("index.html")
       
-  else: 
-    user=User.query.all()
-    if len(user)<2:
+#   else: 
+    users=User.query.all()
+    if len(users)<2:
       flash('Users are less than 2')
       return render_template("index.html")
     else:  
-      return render_template("index.html", values=user)
+      return render_template("index.html", values=users)
 
 @app.route("/show_all")
 def show():

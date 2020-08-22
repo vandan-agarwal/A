@@ -40,7 +40,13 @@
     <div class="container-lg mt-3 border ">
     <form acion="#" method="post">
       <div class="field">
-        <label class="label">Name</label>
+        <label class="label">Select Student 1</label>
+         <input list="names" name="student1"> 
+         <datalist id="names">
+             {% for user in users %}
+             <option value={{user.student_name}}>
+             {% endfor %}
+</datalist> 
         <div class="control">
           <input
             class="input"
