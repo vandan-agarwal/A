@@ -9,7 +9,12 @@ from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///.data/db.sqlite3'
+
 db = SQLAlchemy(app)
+
+
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -58,8 +63,6 @@ def getdateplus(start_date):
 #     else: 
 #         return 0
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///.data/db.sqlite3'
 
 
 @app.route("/email")
