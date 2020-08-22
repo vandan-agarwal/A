@@ -44,7 +44,7 @@
          <input list="names" name="student1"> 
          <datalist id="names">
              {% for user in users %}
-             <option value={{user.student_name}}>
+             <option value="{{user.student_name}}"></option>
              {% endfor %}
 </datalist> 
         <div class="control">
