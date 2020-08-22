@@ -42,6 +42,11 @@ def getdateplus(start_date):
   date_2=end_date.strftime("%m/%d/%Y")
   return date_2
 
+def is_time_between(begin_time, end_time, check_time):
+    if begin_time < check_time && check_time < end_time:
+        return 1
+    else: 
+        return 0
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///.data/db.sqlite3'
@@ -85,7 +90,9 @@ def home():
     start=request.form["start"]
     end=request.form["end"]
     if start<end:
-      f1=Busy.query.filter_by(name=student1)
+      busy1=Busy.query.filter_by(name=student1,date=date).all()
+      for busy in busy1:
+        if 
     if temp:
       flash('Interviewer Unavailable!!')
       return render_template("index.html")
