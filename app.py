@@ -33,6 +33,14 @@ app.config['MAIL_ASCII_ATTACHMENTS'] = False
 mail = Mail(app)
 
 
+@app.route("/email")
+def send_mail():
+  msg = Message("Hello",sender="amanavearma@gmail.com", recipients=["vandanrkt@gmail.com"])
+  mail.send(msg)
+  return "<h1>Message has been sent!</h1>"
+
+
+
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -90,11 +98,7 @@ def index(id):
   else:
     return render_template("edit.html", values=user)
 
-@app.route("/email")
-def send_mail():
-  msg = Message("Hello",sender="amanavearma@gmail.com", recipients=["vandanrkt@gmail.com"])
-  mail.send(msg)
-  return "<h1>Message has been sent!</h1>"
+
 
 
 
