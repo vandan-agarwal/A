@@ -2,13 +2,22 @@ import os
 from datetime import date
 
 from flask import Flask, render_template, redirect, url_for, request, flash
+from flask_mail import Mail
+from flask_mail import Message
 from flask_sqlalchemy import SQLAlchemy 
 
 app = Flask(__name__)
+mail = Mail(app)
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///.data/db.sqlite3'
+
+
+
+
+app.config[''] =
+
 
 
 db = SQLAlchemy(app)
