@@ -81,9 +81,11 @@ def show():
 @app.route("/test")
 def test():
   Te= User.query.all()
+  if len(Te)==2:
+    return "<h1> found</h1>"
+  else:
+    return "<h1> Not found</h1>"
   
-  return render_template("show_all.html", values=User.query.all())
-
 @app.route("/edit/<id>",methods=["POST","GET"])
 def index(id):
   user = User.query.filter_by(id=id).first()
