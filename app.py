@@ -72,12 +72,12 @@ class Interview(db.Model):
 @app.route('/') #, methods=["POST","GET"])
 def home():
   users=User.query.all()
-  return render_template("index.html", values=users)
-  # if len(users)<2:
-  #   flash('Users are less than 2')
-  #   return render_template("index.html")
-  # else:  
-  #   
+  
+  if len(users)<2:
+    flash('Users are less than 2')
+    return render_template("index.html", values=users)
+  else:  
+    return render_template("index.html", values=users)
 #   if request.method == "POST":
 #     student_name= request.form["student_name"]
 #     email= request.form["email"]
