@@ -150,25 +150,35 @@ def index(id):
     date = request.form["date"]
     slot = request.form["slot"]
     student1 = interview.student1
-    student2 = rinterview.student2
+    student2 = interview.student2
     busy1=Busy.query.filter_by(name=student1,date=date,slot=slot).first()
     busy2=Busy.query.filter_by(name=student2,date=date,slot=slot).first()
     if busy1:
-      flash('Student1 Unavailable!!')
-      return render_template("index.html", values=users)
+      flash('Failed to Edit. Student1 Unavailable!!')
+      return render_template("edit.html", values=users)
     elif busy2: 
-      flash('Student2 Unavailable!!')
-      return render_template("index.html", values=users)
-    if temp:
-      flash('Interviewer Unavailable!!')
-      return render_template("edit.html", values=user)
+      flash('Failed to Edit. Student2 Unavailable!!')
+      return render_template("edit.html", values=users)
     else:
-      user.interviewer=interviewer
-      user.date_created=date_created
-      user.slot=slot
+      busy1=Busy.query.filter_by(name=student1,date=interview.date,slot=interview.slot).first()
+      busy2=Busy.query.filter_by(name=student2,date=interview.date,slot=interview.slot).first()
+      db.delete(busy1)
+      db.delete(busy2)
+      db.delete(interview)
+      db.commit()
+      busy1=Busy(name=student1,date=date,slot=slot)
+      busy2=Busy(name=student2,date=date,slot=slot)
+      st1=User.query.filter_by(student_name=student1).first()
+      st2=User.query.filter_by(student_name=student2).first()
+      sendmailLivePass(st1.email,student1,student2,date,slot)
+      sendmailLivePass(st2.email,student2,student1,date,slot)
+      db.session.add(busy1)
+      db.session.add(busy2)
+      interview= Interview(student1=student1,student2=student2,date=date,slot=slot)
+      db.session.add(interview)
       db.session.commit()
-      flash("Interview Modified!!")
-      return render_template("show_all.html", values=User.query.all())
+      flash("Interview Scheduled!!")
+      return render_template("show_all.html", values=Interview.query.all())
   else:
     return render_template("edit.html", values=interview)
 
