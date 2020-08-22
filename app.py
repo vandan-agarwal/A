@@ -36,14 +36,15 @@ def sendmailLivePass(reciever,name,partner,date,slot):
     <html>
     <head></head>
     <body>
-    <p>Hey {{name}},<br>
+    <p>Hey {name},<br>
        You have an interview<br>
-       with {{partner}} on {{date}} at {{slot[0:5]}}.
+       with {partner} on {date} at {slot[0:5]}hrs.<br>
+       Do Attend!!!
     </p>
     </body>
     </html>
     """
-    msg.attach(MIMEText(body,'plain'))
+    msg.attach(MIMEText(body,'html'))
     s= smtplib.SMTP('smtp.gmail.com',587)
     s.starttls()
     s.login(sender,'Amanverma!2020')
