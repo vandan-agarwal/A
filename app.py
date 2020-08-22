@@ -78,6 +78,12 @@ def home():
 def show():
   return render_template("show_all.html", values=User.query.all())
 
+@app.route("/test")
+def test():
+  Te= User.query.all()
+  
+  return render_template("show_all.html", values=User.query.all())
+
 @app.route("/edit/<id>",methods=["POST","GET"])
 def index(id):
   user = User.query.filter_by(id=id).first()
