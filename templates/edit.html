@@ -38,25 +38,18 @@
 {% endwith %}
 {% block body %}{% endblock %}
      <div class="container-lg mt-3 border ">
+        <div class="col-sm-6">
     <div class="field">
-        <label class="label">{{values.student_name}}</label>
+        <label class="label">{{values.student1}}</label>
       </div>
+       </div>
+        <div class="col-sm-6">
     <div class="field">
-        <label class="label">{{values.email}}</label>
+        <label class="label">{{values.student2}}</label>
       </div>
+       </div>
     <form acion="#" method="post">
-      <div class="field">
-        <label class="label">Interviewer</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="Text input"
-            name="interviewer"
-          />
-        </div>
-      </div>
-      <div class="field">
+       <div class="field">
         
         <label class="label">Date</label>
         <div class="control">
@@ -69,15 +62,20 @@
         </div>
       </div>
       <div class="field">
-        <label class="label">Slot</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="Text input"
-            name="slot"
-          />
-        </div>
+      <label class="label">Enter Time Slot</label>
+      <div class="control">
+      <div class="select">
+      <select name="slot">
+               <option>10:00 - 11:30</option> 
+               <option>12:30 - 14:00</option> 
+               <option>14:30 - 16:00</option> 
+               <option>17:00 - 18:30</option>
+               <option>19:00 - 20:30</option> 
+               <option>21:30 - 23:00</option> 
+      </select> 
+      </div>
+      </div>
+      </div>
       </div>
 
       <!-- <div class="field">

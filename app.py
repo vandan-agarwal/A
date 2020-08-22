@@ -142,23 +142,23 @@ def home():
 @app.route("/show_all")
 def show():
   return render_template("show_all.html", values=Interview.query.all())
-
-@app.route("/test")
-def test():
-  Te= User.query.all()
-  if len(Te)==2:
-    return "<h1> found</h1>"
-  else:
-    return "<h1> Not found</h1>"
   
 @app.route("/edit/<id>",methods=["POST","GET"])
 def index(id):
-  user = User.query.filter_by(id=id).first()
+  interview = Interview.query.filter_by(id=id).first()
   if request.method == "POST":
-    interviewer= request.form["interviewer"]
-    date_created= request.form["date"]
-    slot=request.form["slot"]
-    temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
+    date = request.form["date"]
+    slot = request.form["slot"]
+    student1 = interview.student1
+    student2 = rinterview.student2
+    busy1=Busy.query.filter_by(name=student1,date=date,slot=slot).first()
+    busy2=Busy.query.filter_by(name=student2,date=date,slot=slot).first()
+    if busy1:
+      flash('Student1 Unavailable!!')
+      return render_template("index.html", values=users)
+    elif busy2: 
+      flash('Student2 Unavailable!!')
+      return render_template("index.html", values=users)
     if temp:
       flash('Interviewer Unavailable!!')
       return render_template("edit.html", values=user)
@@ -170,7 +170,7 @@ def index(id):
       flash("Interview Modified!!")
       return render_template("show_all.html", values=User.query.all())
   else:
-    return render_template("edit.html", values=user)
+    return render_template("edit.html", values=interview)
 
 
 
