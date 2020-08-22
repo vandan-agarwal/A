@@ -52,6 +52,31 @@ def sendmailLivePass(reciever,name,partner,date,slot):
     s.sendmail(sender,reciever,text)
 
     
+def sendmailLivereschedule(reciever,name,partner,date,slot):
+    sender= 'amanavearma@gmail.com'
+
+    msg= MIMEMultipart()    
+    msg['From'] = sender
+    msg['To'] = reciever
+    msg['Subject'] = 'Interview Scheduled'
+    body = """\
+    <html>
+    <head></head>
+    <body>
+    <p>Hey """+name+""",<br>
+       You interview with """+partner+""" has been reshcheduled for """+date+""" at """+slot[0:5]+""" hrs.<br>
+       Do Attend!!!
+    </p>
+    <p>You can practice <a href="https://www.interviewbit.com/practice/">here</a>.</p> 
+    </body>
+    </html>
+    """
+    msg.attach(MIMEText(body,'html'))
+    s= smtplib.SMTP('smtp.gmail.com',587)
+    s.starttls()
+    s.login(sender,'Amanverma!2020')
+    text= msg.as_string()
+    s.sendmail(sender,reciever,text)
 # def getdateplus(start_date):
 #   date_1 = datetime.datetime.strptime(start_date, "%m/%d/%Y")
 #   end_date = date_1 + datetime.timedelta(days=1)
@@ -133,7 +158,7 @@ def home():
       return render_template("index.html", values=users)
   else:
     if len(users)<2:
-      flash('Users are less than 2')
+      flash('Can not Schedule any interviews coz Users are less than 2')
       return render_template("index.html", values=users)
     else:  
       return render_template("index.html", values=users)
@@ -162,22 +187,21 @@ def index(id):
     else:
       busy1=Busy.query.filter_by(name=student1,date=interview.date,slot=interview.slot).first()
       busy2=Busy.query.filter_by(name=student2,date=interview.date,slot=interview.slot).first()
-      db.delete(busy1)
-      db.delete(busy2)
-      db.delete(interview)
-      db.commit()
+      db.session.delete(busy1)
+      db.session.delete(busy2)
+      db.session.delete(interview)
       busy1=Busy(name=student1,date=date,slot=slot)
       busy2=Busy(name=student2,date=date,slot=slot)
       st1=User.query.filter_by(student_name=student1).first()
       st2=User.query.filter_by(student_name=student2).first()
-      sendmailLivePass(st1.email,student1,student2,date,slot)
-      sendmailLivePass(st2.email,student2,student1,date,slot)
+      sendmailLivereschedule(st1.email,student1,student2,date,slot)
+      sendmailLivereschedule(st2.email,student2,student1,date,slot)
       db.session.add(busy1)
       db.session.add(busy2)
-      interview= Interview(student1=student1,student2=student2,date=date,slot=slot)
+      interview= Interview(id=id,student1=student1,student2=student2,date=date,slot=slot)
       db.session.add(interview)
       db.session.commit()
-      flash("Interview Scheduled!!")
+      flash("Interview Rescheduled!!")
       return render_template("show_all.html", values=Interview.query.all())
   else:
     return render_template("edit.html", values=interview)
