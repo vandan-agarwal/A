@@ -19,6 +19,12 @@ from email.mime.image import MIMEImage
 from email import encoders
 
 
+def getdateplus(start_date):
+  date_1 = datetime.datetime.strptime(start_date, "%m/%d/%y")
+  end_date = date_1 + datetime.timedelta(days=1)
+  date_2=datetime.strftime(end_date)
+  
+  
 def sendmailLivePass(reciever):
     sender= 'amanavearma@gmail.com'
 
@@ -69,34 +75,32 @@ class Interview(db.Model):
     end=db.Column(db.String(5))
     
 
-@app.route('/') #, methods=["POST","GET"])
+@app.route('/') , methods=["POST","GET"])
 def home():
-  users=User.query.all()
-  
-  if len(users)<2:
-    flash('Users are less than 2')
-    return render_template("index.html", values=users)
-  else:  
-    return render_template("index.html", values=users)
-#   if request.method == "POST":
-#     student_name= request.form["student_name"]
-#     email= request.form["email"]
-#     interviewer= request.form["interviewer"]
-#     date_created= request.form["date"]
-#     slot=request.form["slot"]
-#     temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
-#     if temp:
-#       flash('Interviewer Unavailable!!')
-#       return render_template("index.html")
-#     else: 
-#       user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
-#       db.session.add(user)
-#       db.session.commit()
-#       flash("Interview Scheduled!!")
-#       return render_template("index.html")
+  if request.method == "POST":
+    student1 = request.form["student1"]
+    student2 = request.form["student2"]
+    date = request.form["date"]
+    start=request.form["start"]
+    end=request.form["end"]
+    temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
+    if temp:
+      flash('Interviewer Unavailable!!')
+      return render_template("index.html")
+    else: 
+      user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
+      db.session.add(user)
+      db.session.commit()
+      flash("Interview Scheduled!!")
+      return render_template("index.html")
+  else:
+    users=User.query.all()
+    if len(users)<2:
+      flash('Users are less than 2')
+      return render_template("index.html", values=users)
+    else:  
+      return render_template("index.html", values=users)
       
-#   else: 
-    
 
 @app.route("/show_all")
 def show():
