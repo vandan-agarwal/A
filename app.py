@@ -2,11 +2,11 @@ import os
 from datetime import date
 
 from flask import Flask, render_template, redirect, url_for, request, flash
-from flask_mail import Mail
-from flask_mail import Message
 from flask_sqlalchemy import SQLAlchemy 
 
 app = Flask(__name__)
+
+
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -33,25 +33,6 @@ def sendmailLivePass(reciever):
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///.data/db.sqlite3'
-
-
-
-
-# app.config['DEBUG'] = True
-# app.config['TESTING'] = False
-# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-# app.config['MAIL_PORT'] = 587
-# app.config['MAIL_USE_TLS'] = True
-# app.config['MAIL_USE_SSL'] = False
-# app.config['MAIL_USERNAME'] = 'amanavearma@gmail.com'
-# app.config['MAIL_PASSWORD '] = 'Amanverma!2020'
-# app.config['MAIL_DEFAULT_SENDER'] = 'amanavearma@gmail.com'
-# app.config['MAIL_MAX_EMAILS'] = None
-# # app.config['MAIL_SUPPRESS_SEND'] = ''
-# app.config['MAIL_ASCII_ATTACHMENTS'] = False
-
-
-# mail = Mail(app)
 
 
 @app.route("/email")
@@ -117,9 +98,6 @@ def index(id):
       return render_template("show_all.html", values=User.query.all())
   else:
     return render_template("edit.html", values=user)
-
-
-
 
 
 
