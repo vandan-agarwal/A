@@ -1,6 +1,10 @@
 import os
-from datetime import date
+import datetime
 
+date_1 = datetime.datetime.strptime(start_date, "%m/%d/%y")
+
+end_date = date_1 + datetime.timedelta(days=10)
+date_2=datetime.strftime(end_date)
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy 
 
@@ -48,6 +52,16 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     student_name = db.Column(db.String(50))
     email=db.Column(db.String(50))
+
+class Busy(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    student_name = db.Column(db.String(50))
+    Date=db.Column(db.String(10))
+    start=db.Column(db.String(5))
+    end=db.Column(db.String(5))
+
+    
+    
     interviewer = db.Column(db.String(50))
     date_created = db.Column(db.String(50))		
     slot=db.Column(db.String(50))
