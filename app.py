@@ -9,7 +9,7 @@ from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy 
 
 app = Flask(__name__)
-
+db = SQLAlchemy(app)
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -19,12 +19,7 @@ from email.mime.image import MIMEImage
 from email import encoders
 
 
-def getdateplus(start_date):
-  date_1 = datetime.datetime.strptime(start_date, "%m/%d/%y")
-  end_date = date_1 + datetime.timedelta(days=1)
-  date_2=datetime.strftime(end_date)
-  
-  
+
 def sendmailLivePass(reciever):
     sender= 'amanavearma@gmail.com'
 
@@ -40,6 +35,13 @@ def sendmailLivePass(reciever):
     text= msg.as_string()
     s.sendmail(sender,reciever,text)
 
+    
+def getdateplus(start_date):
+  date_1 = datetime.datetime.strptime(start_date, "%m/%d/%Y")
+  end_date = date_1 + datetime.timedelta(days=1)
+  date_2=end_date.strftime("%m/%d/%Y")
+  return date_2
+
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///.data/db.sqlite3'
@@ -52,7 +54,6 @@ def send_mail():
 
 
 
-db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -61,7 +62,7 @@ class User(db.Model):
 
 class Busy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    student_name = db.Column(db.String(50))
+    name = db.Column(db.String(50))
     Date=db.Column(db.String(10))
     start=db.Column(db.String(5))
     end=db.Column(db.String(5))
@@ -75,7 +76,7 @@ class Interview(db.Model):
     end=db.Column(db.String(5))
     
 
-@app.route('/') , methods=["POST","GET"])
+@app.route('/', methods=["POST","GET"])
 def home():
   if request.method == "POST":
     student1 = request.form["student1"]
@@ -83,7 +84,8 @@ def home():
     date = request.form["date"]
     start=request.form["start"]
     end=request.form["end"]
-    temp=User.query.filter_by(interviewer=interviewer,date_created=date_created,slot=slot).first()
+    if start<end:
+      f1=Busy.query.filter_by(name=student1)
     if temp:
       flash('Interviewer Unavailable!!')
       return render_template("index.html")
