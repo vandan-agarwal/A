@@ -7,7 +7,28 @@ from flask_mail import Message
 from flask_sqlalchemy import SQLAlchemy 
 
 app = Flask(__name__)
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
+from email import encoders
 
+
+def sendmailLivePass(reciever):
+    sender= 'amanavearma@gmail.com'
+
+    msg= MIMEMultipart()    
+    msg['From'] = sender
+    msg['To'] = reciever
+    msg['Subject'] = 'Access Granted'
+    body = """Hello"""
+    msg.attach(MIMEText(body,'plain'))
+    s= smtplib.SMTP('smtp.gmail.com',587)
+    s.starttls()
+    s.login(sender,'Amanverma!2020')
+    text= msg.as_string()
+    s.sendmail(sender,reciever,text)
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -16,27 +37,26 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///.data/db.sqlite3'
 
 
 
-app.config['DEBUG'] = True
-app.config['TESTING'] = False
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'amanavearma@gmail.com'
-app.config['MAIL_PASSWORD '] = 'Amanverma!2020'
-app.config['MAIL_DEFAULT_SENDER'] = 'amanavearma@gmail.com'
-app.config['MAIL_MAX_EMAILS'] = None
-# app.config['MAIL_SUPPRESS_SEND'] = ''
-app.config['MAIL_ASCII_ATTACHMENTS'] = False
+# app.config['DEBUG'] = True
+# app.config['TESTING'] = False
+# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+# app.config['MAIL_PORT'] = 587
+# app.config['MAIL_USE_TLS'] = True
+# app.config['MAIL_USE_SSL'] = False
+# app.config['MAIL_USERNAME'] = 'amanavearma@gmail.com'
+# app.config['MAIL_PASSWORD '] = 'Amanverma!2020'
+# app.config['MAIL_DEFAULT_SENDER'] = 'amanavearma@gmail.com'
+# app.config['MAIL_MAX_EMAILS'] = None
+# # app.config['MAIL_SUPPRESS_SEND'] = ''
+# app.config['MAIL_ASCII_ATTACHMENTS'] = False
 
 
-mail = Mail(app)
+# mail = Mail(app)
 
 
 @app.route("/email")
 def send_mail():
-  msg = Message("Hello",sender="amanavearma@gmail.com", recipients=["vandanrkt@gmail.com"])
-  mail.send(msg)
+  sendmailLivePass('vandanrkt@gmail.com')
   return "<h1>Message has been sent!</h1>"
 
 
