@@ -36,11 +36,11 @@ def sendmailLivePass(reciever,name,partner,date,slot):
     <html>
     <head></head>
     <body>
-    <p>Hey {name},<br>
-       You have an interview<br>
-       with {partner} on {date} at {slot[0:5]}hrs.<br>
+    <p>Hey """+name+""",<br>
+       You have an interview with """+partner+""" on """+date+""" at """+slot[0:5]+""" hrs.<br>
        Do Attend!!!
     </p>
+    <p>You can practice <a href="https://www.interviewbit.com/practice/">here</a>.</p> 
     </body>
     </html>
     """
@@ -52,11 +52,11 @@ def sendmailLivePass(reciever,name,partner,date,slot):
     s.sendmail(sender,reciever,text)
 
     
-def getdateplus(start_date):
-  date_1 = datetime.datetime.strptime(start_date, "%m/%d/%Y")
-  end_date = date_1 + datetime.timedelta(days=1)
-  date_2=end_date.strftime("%m/%d/%Y")
-  return date_2
+# def getdateplus(start_date):
+#   date_1 = datetime.datetime.strptime(start_date, "%m/%d/%Y")
+#   end_date = date_1 + datetime.timedelta(days=1)
+#   date_2=end_date.strftime("%m/%d/%Y")
+#   return date_2
 
 # def is_time_between(begin_time, end_time, check_time):
 #     if begin_time < check_time && check_time < end_time:
