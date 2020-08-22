@@ -40,24 +40,31 @@
     <div class="container-lg mt-3 border ">
     <form acion="#" method="post">
       <div class="field">
-        <label class="label">Select Student 1</label>
-         <input list="names" name="student1"> 
-         <datalist id="names">
-             {% for user in values %}
-               <option value="{{user.student_name}}">
-             {% endfor %}
-        </datalist> 
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="Text input"
-            name="student_name"
-          />
-        </div>
+      <label class="label">Select Student1</label>
+      <div class="control">
+      <div class="select">
+      <select name="student1">
+        {% for user in values %}
+               <option>{{user.student_name}}</option> 
+        {% endfor %}
+      </select> 
+      </div>
+      </div>
+      </div>
+      <div class="field">
+      <label class="label">Select Student2</label>
+      <div class="control">
+      <div class="select">
+      <select name="student2">
+        {% for user in values %}
+               <option>{{user.student_name}}</option> 
+        {% endfor %}
+      </select> 
+      </div>
+      </div>
       </div>
 
-      <div class="field">
+<!--       <div class="field">
         <label class="label">Email</label>
         <div class="control has-icons-left has-icons-right">
           <input
@@ -73,7 +80,7 @@
             <i class="fas fa-exclamation-triangle"></i>
           </span>
         </div>
-      </div>
+      </div> 
       <div class="field">
         <label class="label">Interviewer( List to be added)</label>
         <div class="control">
@@ -84,7 +91,7 @@
             name="interviewer"
           />
         </div>
-      </div>
+      </div>-->
       <div class="field">
         
         <label class="label">Date</label>
@@ -97,17 +104,33 @@
           />
         </div>
       </div>
-      <div class="field">
-        <label class="label">Slot ( List to be addded )</label>
+      <div class="col-sm-6">
+        <div class="field">
+        <label class="label">Start Time</label>
         <div class="control">
           <input
             class="input"
             type="time"
             placeholder="Text input"
-            name="slot"
+            name="start"
           />
         </div>
       </div>
+      </div>
+     <div class="col-sm-6">
+        <div class="field">
+        <label class="label">End Time</label>
+        <div class="control">
+          <input
+            class="input"
+            type="time"
+            placeholder="Text input"
+            name="end"
+          />
+        </div>
+      </div>
+      </div>
+      
       
 
       <!-- <div class="field">
