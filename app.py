@@ -91,14 +91,12 @@ def home():
     slot = request.form["slot"]
     # start=request.form["start"]
     # end=request.form["end"]
-    if start<end:
-      busy1=Busy.query.filter_by(name=student1,date=date).all()
-      for busy in busy1:
-        if 
-    if temp:
-      flash('Interviewer Unavailable!!')
+    busy1=Busy.query.filter_by(name=student1,date=date,slot=slot).first()
+    busy2=Busy.query.filter_by(name=student2,date=date,slot=slot).first()
+    if busy1:
+      flash('Student1 Unavailable!!')
       return render_template("index.html")
-    else: 
+    else if busy2: 
       user= User(student_name=student_name,email=email, interviewer=interviewer, date_created=date_created, slot=slot)
       db.session.add(user)
       db.session.commit()
