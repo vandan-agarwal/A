@@ -42,11 +42,11 @@ def getdateplus(start_date):
   date_2=end_date.strftime("%m/%d/%Y")
   return date_2
 
-def is_time_between(begin_time, end_time, check_time):
-    if begin_time < check_time && check_time < end_time:
-        return 1
-    else: 
-        return 0
+# def is_time_between(begin_time, end_time, check_time):
+#     if begin_time < check_time && check_time < end_time:
+#         return 1
+#     else: 
+#         return 0
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///.data/db.sqlite3'
@@ -69,16 +69,17 @@ class Busy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     Date=db.Column(db.String(10))
-    start=db.Column(db.String(5))
-    end=db.Column(db.String(5))
+    slot=db.Column(db.String(5))
+    # end=db.Column(db.String(5))
 
 class Interview(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     student1 = db.Column(db.String(50))
     student2 = db.Column(db.String(50))
     date = db.Column(db.String(50))
-    start=db.Column(db.String(5))
-    end=db.Column(db.String(5))
+    slot=db.Column(db.String(5))
+    # start=db.Column(db.String(5))
+    # end=db.Column(db.String(5))
     
 
 @app.route('/', methods=["POST","GET"])
@@ -87,8 +88,9 @@ def home():
     student1 = request.form["student1"]
     student2 = request.form["student2"]
     date = request.form["date"]
-    start=request.form["start"]
-    end=request.form["end"]
+    slot = request.form["slot"]
+    # start=request.form["start"]
+    # end=request.form["end"]
     if start<end:
       busy1=Busy.query.filter_by(name=student1,date=date).all()
       for busy in busy1:
