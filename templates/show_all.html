@@ -47,9 +47,8 @@
   <thead>
     <tr>
       <th scope="col">id</th>
-      <th scope="col">Student_Name</th>
-      <th scope="col">email</th>
-      <th scope="col">Interviewer</th>
+      <th scope="col">Student1</th>
+      <th scope="col">Student2</th>
       <th scope="col">Date</th>
       <th scope="col">slot</th>
       <th scope="col">Edit</th>
@@ -59,10 +58,9 @@
 {% for item in values %}
 <tr>
       <th scope="row">{{item.id}}</th>
-      <td>{{item.student_name}}</td>
-      <td>{{item.email}}</td>
-  <td>{{item.interviewer}}</td>
-  <td>{{item.date_created}}</td>
+      <td>{{item.student1}}</td>
+      <td>{{item.student2}}</td>
+  <td>{{item.date}}</td>
   <td>{{item.slot}}</td>
   <td><a href="/edit/{{item.id}}">edit</a></td>
 </tr>  

@@ -98,6 +98,7 @@ class Interview(db.Model):
 
 @app.route('/', methods=["POST","GET"])
 def home():
+  users=User.query.all()
   if request.method == "POST":
     student1 = request.form["student1"]
     student2 = request.form["student2"]
@@ -109,10 +110,13 @@ def home():
     busy2=Busy.query.filter_by(name=student2,date=date,slot=slot).first()
     if busy1:
       flash('Student1 Unavailable!!')
-      return render_template("index.html")
+      return render_template("index.html", values=users)
     elif busy2: 
       flash('Student2 Unavailable!!')
-      return render_template("index.html")
+      return render_template("index.html", values=users)
+    elif student1==student2:
+      flash('Both students can not be the same.!!')
+      return render_template("index.html", values=users)
     else:
       busy1=Busy(name=student1,date=date,slot=slot)
       busy2=Busy(name=student2,date=date,slot=slot)
@@ -126,9 +130,8 @@ def home():
       db.session.add(interview)
       db.session.commit()
       flash("Interview Scheduled!!")
-      return render_template("index.html")
+      return render_template("index.html", values=users)
   else:
-    users=User.query.all()
     if len(users)<2:
       flash('Users are less than 2')
       return render_template("index.html", values=users)
@@ -138,7 +141,7 @@ def home():
 
 @app.route("/show_all")
 def show():
-  return render_template("show_all.html", values=User.query.all())
+  return render_template("show_all.html", values=Interview.query.all())
 
 @app.route("/test")
 def test():
