@@ -1,5 +1,4 @@
-Flask Python Experiment
+Interview Scheduler 
 =======================
 
-Packages on `requirements.txt` will automatically get installed with pip
-`start.sh` is the startup script.
+A simple web application based of Flask and SQLalchemy to schedule interviews

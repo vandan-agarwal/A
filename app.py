@@ -91,14 +91,6 @@ def sendmailLivereschedule(reciever,name,partner,date,slot):
 
 
 
-@app.route("/email")
-def send_mail():
-  sendmailLivePass('vandanrkt@gmail.com')
-  return "<h1>Message has been sent!</h1>"
-
-
-
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     student_name = db.Column(db.String(50))
